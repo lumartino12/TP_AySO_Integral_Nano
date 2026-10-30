@@ -6,4 +6,7 @@
 
 #Juan Martin Castro  -  Legajo: 110419
 
-#Mirko Ezequiel Szychowski - Legajo: 121764
+#Mirko Ezequiel Szychowski - Legajo: 121764 
+
+#Ignacio Tenasczuk - Legajo: 121767
+
