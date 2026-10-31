@@ -29,6 +29,7 @@ Vagrant.configure("2") do |config|
         vb.customize ['modifyvm', :id, '--graphicscontroller', 'vmsvga']      
       end    
       # Puedo Ejecutar un script que esta en un archivo
+      vmHost1.vm.provision "shell", path: "configurar_lvm.sh"
       vmHost1.vm.provision "shell", path: "script_Enable_ssh_password.sh"
       vmHost1.vm.provision "shell", privileged: false, path: "script_Fix_history.sh"
       vmHost1.vm.provision "shell", path: "instala_paquetes.sh"
@@ -74,12 +75,22 @@ Vagrant.configure("2") do |config|
     
     
     # Puedo Ejecutar un script que esta en un archivo
+    vmHost2.vm.provision "shell", path: "configurar_lvm.sh"
     vmHost2.vm.provision "shell", path: "script_Enable_ssh_password.sh"
     vmHost2.vm.provision "shell", privileged: false, path: "script_Fix_history.sh"
 
-    # Provisión para instalar
+    # Provisión para instalar Ansible, Git y Tree en Fedora
     vmHost2.vm.provision "shell", inline: <<-SHELL
-      dnf install -y tree
+      dnf install -y ansible tree git
+    SHELL
+
+    # Provisión para clonar los repositorios como usuario vagrant
+    vmHost2.vm.provision "shell", privileged: false, inline: <<-SHELL
+      mkdir -p /home/vagrant/repogit
+      cd /home/vagrant/repogit
+      git clone https://github.com/upszot/UTN-FRA_SO_onBording.git 
+      git clone https://github.com/upszot/UTN-FRA_SO_Ansible.git
+      git clone https://github.com/upszot/UTN-FRA_SO_Docker.git
     SHELL
   end
 end
