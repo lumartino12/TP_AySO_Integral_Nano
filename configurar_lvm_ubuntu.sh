@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# ==========================================
-# 1. PARTICIONAMIENTO DE DISCOS
-# ==========================================
+#Script para configurar LVM Ubuntu
+
 sudo fdisk /dev/sdf <<EOF
 n
 p
@@ -39,7 +38,7 @@ EOF
 sudo wipefs -a /dev/sde1 /dev/sdf1 /dev/sdf2
 
 
-# 3. CONFIGURACIÓN DE VG_DATOS (/dev/sdf1)
+# 3. CONFIGURACIÓN DE VG_DATOS 
 
 sudo pvcreate /dev/sdf1
 sudo vgcreate vg_datos /dev/sdf1
@@ -48,7 +47,7 @@ sudo lvcreate -L 2.5G vg_datos -n lv_workareas
 sudo lvcreate -L 10M vg_datos -n lv_docker
 
 
-# 4. CONFIGURACIÓN DE VG_TEMP Y SWAP (/dev/sde1)
+# 4. CONFIGURACIÓN DE VG_TEMP Y SWAP 
 
 sudo pvcreate /dev/sde1
 sudo vgcreate vg_temp /dev/sde1

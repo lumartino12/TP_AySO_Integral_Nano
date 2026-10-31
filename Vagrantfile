@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
         vb.customize ['modifyvm', :id, '--graphicscontroller', 'vmsvga']      
       end    
       # Puedo Ejecutar un script que esta en un archivo
-      vmHost1.vm.provision "shell", path: "configurar_lvm.sh"
+      vmHost1.vm.provision "shell", path: "configurar_lvm_ubuntu.sh"
       vmHost1.vm.provision "shell", path: "script_Enable_ssh_password.sh"
       vmHost1.vm.provision "shell", privileged: false, path: "script_Fix_history.sh"
       vmHost1.vm.provision "shell", path: "instala_paquetes.sh"
@@ -75,7 +75,7 @@ Vagrant.configure("2") do |config|
     
     
     # Puedo Ejecutar un script que esta en un archivo
-    vmHost2.vm.provision "shell", path: "configurar_lvm.sh"
+    vmHost2.vm.provision "shell", path: "configurar_lvm_fedora.sh"
     vmHost2.vm.provision "shell", path: "script_Enable_ssh_password.sh"
     vmHost2.vm.provision "shell", privileged: false, path: "script_Fix_history.sh"
 
